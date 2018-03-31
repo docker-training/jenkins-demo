@@ -16,4 +16,4 @@
     RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
     COPY entrypoint.sh /
     ENTRYPOINT /entrypoint.sh
-    # build bump 2
+    # build bump 3
