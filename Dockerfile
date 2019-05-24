@@ -5,8 +5,8 @@ RUN mkdir /app
 WORKDIR /app
 COPY hello.c /app
 RUN mkdir bin
-RUN gcc -Wall hello.c -o bin/hello
+RUN gcc -Wall hello.c -o bin/hw
 
 FROM alpine:3.5
-COPY --from=build /app/bin/hello /app/hello
-CMD /app/hello
+COPY --from=build /app/bin/hw /app/hw
+CMD /app/hw
