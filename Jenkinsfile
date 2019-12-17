@@ -2,14 +2,11 @@ pipeline {
 
     agent any    
 
-    environment {
-        DTR_FQDN_PORT = credentials('dtr-fqdn-port')
-    }
-
     stages {
         stage('Build') {
             environment {
                 DTR_ACCESS_KEY = credentials('jenkins-dtr-access-token')
+                DTR_FQDN_PORT = credentials('dtr-fqdn-port')
             }
             steps {
                 sh 'docker image build \
