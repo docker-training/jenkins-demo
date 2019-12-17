@@ -9,13 +9,15 @@ pipeline {
                 DTR_FQDN_PORT = credentials('dtr-fqdn-port')
             }
             steps {
-                sh 'cd /home/jenkins/admincerts ; \
-                    ./env.sh ; \
-                    cd - ; \
-                    echo ${KUBECONFIG} ; \
-                    docker image build -t ${DTR_FQDN_PORT}/engineering/jenkins-demo:build-${BUILD_ID} . ; \
-                    docker login -u jenkins -p ${DTR_ACCESS_KEY} ${DTR_FQDN_PORT} ; \
-                    docker image push ${DTR_FQDN}/engineering/jenkins-demo:build-${BUILD_ID}'
+                script {
+                    cd /home/jenkins/admincerts
+                    eval "$(<env.sh)"
+                    cd -
+                    echo ${KUBECONFIG}
+                    docker image build -t ${DTR_FQDN_PORT}/engineering/jenkins-demo:build-${BUILD_ID} .
+                    docker login -u jenkins -p ${DTR_ACCESS_KEY} ${DTR_FQDN_PORT}
+                    docker image push ${DTR_FQDN}/engineering/jenkins-demo:build-${BUILD_ID}
+                }
             }
         }
     }
