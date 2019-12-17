@@ -10,6 +10,7 @@ pipeline {
             }
             steps {
                 sh 'cd /home/jenkins/admincerts && bash ./env.sh && cd -'
+                sh 'echo ${KUBECONFIG}'
                 sh 'docker image build \
                     -t ${DTR_FQDN_PORT}/engineering/jenkins-demo:build-${BUILD_ID} .'
                 sh 'docker login -u jenkins -p ${DTR_ACCESS_KEY} ${DTR_FQDN_PORT} ; \
